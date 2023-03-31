@@ -26,10 +26,10 @@ public class test : MonoBehaviour
 
     private void RenderLegend(Cell cell, GameObject textObject)
     {
-        TextMeshPro textMesh = textObject.GetComponent<TextMeshPro>();
+        //Doing it this way paves the ground for adding more text elements,
+        //and accessing these new elements via the index in GetChild().
+        TextMeshPro textMesh = textObject.transform.Find("Coords").gameObject.GetComponent<TextMeshPro>();
         textMesh.text = cell.GetCoords().x + "," + cell.GetCoords().z;
-        //textMesh.fontSize = 6;
-        //textMesh.color = Color.black;
-        textMesh.transform.position = cell.transform.position + new Vector3(0f, 0.01f, 0f);
+        textObject.transform.position = cell.transform.position + new Vector3(0f, 0.01f, 0f); // Nudge it up a bit to avoid z-fighting
     }
 }
